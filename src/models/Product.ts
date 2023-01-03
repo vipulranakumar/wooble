@@ -16,9 +16,10 @@ const ProductSchema = new mongoose.Schema({
     heading                  : {type: String, required: true},
     heading_description      : {type: String, required: true},
     yt_url                   : {type: String, required: false},
+    tutorial_video_status    : {type: Boolean, required: true, default: false},
     tutorial_video           : {type: String, required: false},
     html_content             : {type: String, required: true},
-    
+
     seo_title                : {type: String, required: false},
     seo_keywords             : {type: String, required: false},
     seo_description          : {type: String, required: false},
