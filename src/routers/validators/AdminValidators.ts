@@ -14,7 +14,8 @@ export class AdminValidators{
                                     }
                                 })
                     }),
-                    body('name', 'name is Required').isString()
+                    body('name', 'name is Required').isString(), 
+                    body('password', 'Password is Required').isString()
                 ]
         
     }
@@ -30,7 +31,8 @@ export class AdminValidators{
                         throw  new Error('owner Does Not Exist');
                     }
                 });
-            }), query('password', 'Password is Required').isAlphanumeric()]
+            }), 
+            query('password', 'Password is Required').isString()]
     }
 
 
