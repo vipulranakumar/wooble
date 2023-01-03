@@ -18,7 +18,7 @@ class ProductRouter {
     getRoutes(){
         this.router.get('/title/:slug', ProductValidators.Product(), GlobalMiddleWare.checkError, ProductController.Product);
         this.router.get('/all', ProductController.All);
-
+        this.router.get('/search', ProductController.Search);
         // API
         this.router.get('/admin/all', GlobalMiddleWare.adminAuthenticate, ProductController.adminAll);
         this.router.get('/product_category/:id', ProductValidators.Product_category(), GlobalMiddleWare.checkError, ProductController.ProductCategory);

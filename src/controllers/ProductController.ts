@@ -65,10 +65,28 @@ export class ProductController {
 
         try {
             if(req.query.limit){
-                console.log(req.query.limit);
-                var product = await Product.find({status:true}).limit(parseInt(req.query.limit)).sort({sequence:1});
+                var product = await Product.find({status:true},{login_password:0}).limit(parseInt(req.query.limit)).sort({sequence:1}).populate('product_category_id');
             }else{
-                var product = await Product.find({status:true}).sort({sequence:1});
+                var product = await Product.find({status:true},{login_password:0}).sort({sequence:1}).populate('product_category_id');
+            }
+            
+            const data = {
+                message : 'Success',
+                data:product
+            };
+            res.json(data);
+        } catch (e) {
+            next(e)
+        }
+    }
+
+    static async Search(req, res, next){
+
+        try {
+            if(req.query.keyword){
+                var product = await Product.find({name: { $regex: '.*' + req.query.keyword + '.*' , $options: 'i'}, status:true},{login_password:0}).limit(parseInt(req.query.limit)).sort({sequence:1}).populate('product_category_id');
+            }else{
+                var product = await Product.find({status:true},{login_password:0}).sort({sequence:1}).populate('product_category_id');
             }
             
             const data = {

@@ -26,7 +26,7 @@ export class ProductValidators{
 
     static Product() { 
         return [param('slug').custom((slug, {req}) => {
-            return Product.findOne({slug: slug}, {__v: 0}).then((product) => {
+            return Product.findOne({slug: slug}, {__v: 0, login_password:0}).populate('product_category_id').then((product) => {
                 if (product) {
                     req.product = product;
                     return true;
