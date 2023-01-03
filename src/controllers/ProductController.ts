@@ -98,15 +98,22 @@ export class ProductController {
     static async Delete(req, res, next) {
         const product = req.product;
         try {
-            await fs.unlink(product['image'], async (err) => {
-                if (err) throw err;
-            });
-            await fs.unlink(product['login_image'], async (err) => {
-                if (err) throw err;
-            });
-            await fs.unlink(product['tutorial_video'], async (err) => {
-                if (err) throw err;
-            });
+            if(product['image']){
+                await fs.unlink(product['image'], async (err) => {
+                    if (err) throw err;
+                });
+            }
+
+            if(product['login_image']){
+                await fs.unlink(product['login_image'], async (err) => {
+                    if (err) throw err;
+                });
+            }
+            if(product['tutorial_video']){
+                await fs.unlink(product['tutorial_video'], async (err) => {
+                    if (err) throw err;
+                });
+            }
             await product.remove();
             res.json({
                 message:'Success ! Product Deleted Successfully',

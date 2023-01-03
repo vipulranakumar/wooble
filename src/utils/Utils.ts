@@ -30,7 +30,7 @@ const productStorageOptions=Multer.diskStorage({
     }
 });
 const productFileFilter = (req, file, cb) => {
-    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'audio/mpeg' || file.mimetype ==='audio/mp3') {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'video/mp4' || file.mimetype ==='video/flv') {
         cb(null, true);
     } else {
         cb(null, false);
