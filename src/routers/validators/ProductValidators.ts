@@ -37,6 +37,30 @@ export class ProductValidators{
         })]
     }
 
+    static login() {
+        return [
+            query('slug', 'slug is Required').custom((slug, {req}) => {
+                return Product.findOne({slug: slug}, {__v: 0, login_password:0}).then(product => {
+                    if (product) {
+                        return true;
+                    } else {
+                        throw  new Error('Product Does Not Exist');
+                    }
+                });
+            }), 
+            query('password', 'Password is Required').isString().custom((password, {req}) => {
+                return Product.findOne({login_password: password, slug:req.query.slug}, {__v: 0, login_password:0}).then(product => {
+                    if (product) {
+                        req.product = product;
+                        return true;
+                    } else {
+                        throw  new Error('Wrong Password');
+                    }
+                });
+            })
+        ]
+    }
+
     static Product_category() {
         return [param('id').custom((id, {req}) => {
             return ProductCategory.findOne({_id: id}, {__v: 0}).then((product_category) => {

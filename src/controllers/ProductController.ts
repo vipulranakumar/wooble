@@ -99,6 +99,15 @@ export class ProductController {
         }
     }
 
+    static async login(req, res, next) {
+        const product = req.product;
+        const data = {
+            message : 'Success',
+            data:product
+        };
+        res.json(data);
+    }
+
     static async adminAll(req, res, next){
 
         try {
