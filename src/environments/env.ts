@@ -8,7 +8,7 @@ export interface Environment {
 
 export function getEnvironmentVariables() {
 
-    if(process.env.NODE_ENV==='production'){
+    if(process.env.NODE_ENV==='PRODUCTION'){
         return ProdEnvironment;
     }
     return DevEnvironment;
