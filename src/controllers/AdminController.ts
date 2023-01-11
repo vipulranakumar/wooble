@@ -2,6 +2,7 @@ import * as Jwt from "jsonwebtoken";
 import { getEnvironmentVariables } from "../environments/env";
 import Admin from "../models/Admin";
 import { Utils } from "../utils/Utils";
+import * as fs from 'fs';
 
 export class AdminController {
 
@@ -63,10 +64,16 @@ export class AdminController {
 
     static async update(req, res, next) {
         const adminId = req.admin.admin_id;
+        var admin = await Admin.findById({_id:adminId}, {__v: 0});
         let data:any = {};
-        if(req.files.profile_pic){
-            const profile_picUrl:any = req.files.profile_pic[0].path.replace(/\\/g, "/");
-            data.profile_pic=profile_picUrl;
+        if(req.files.banner){
+            if(admin['banner']){
+                await fs.unlink(admin['banner'], async (err) => {
+                    if (err) throw err;
+                });
+            }
+            const bannerUrl:any = req.files.banner[0].path.replace(/\\/g, "/");
+            data.banner=bannerUrl;
         }
 
         if(req.body.password){

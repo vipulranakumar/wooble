@@ -156,23 +156,29 @@ export class ProductController {
         const product = req.product;
         let fileObject:any = {};
         if(req.files.image){
-            await fs.unlink(product['image'], async (err) => {
-                if (err) throw err;
-            });
+            if(product['image']){
+                await fs.unlink(product['image'], async (err) => {
+                    if (err) throw err;
+                });
+            }
             const imageUrl:any = req.files.image[0].path.replace(/\\/g, "/");
             fileObject.image=imageUrl;
         }
         if(req.files.login_image){
-            await fs.unlink(product['login_image'], async (err) => {
-                if (err) throw err;
-            });
+            if(product['login_image']){
+                await fs.unlink(product['login_image'], async (err) => {
+                    if (err) throw err;
+                });
+            }
             const login_imageUrl:any = req.files.login_image[0].path.replace(/\\/g, "/");
             fileObject.login_image=login_imageUrl;
         }
         if(req.files.tutorial_video){
-            await fs.unlink(product['tutorial_video'], async (err) => {
-                if (err) throw err;
-            });
+            if(product['tutorial_video']){
+                await fs.unlink(product['tutorial_video'], async (err) => {
+                    if (err) throw err;
+                });
+            }
             const tutorial_videoUrl:any = req.files.tutorial_video[0].path.replace(/\\/g, "/");
             fileObject.tutorial_video=tutorial_videoUrl;
         }

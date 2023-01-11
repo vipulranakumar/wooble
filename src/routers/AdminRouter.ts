@@ -21,10 +21,10 @@ class AdminRouter {
         this.router.get('/login', AdminValidators.login(), GlobalMiddleWare.checkError, AdminController.login);
     }
     postRoutes(){
-        this.router.post('/create', new Utils().adminMulter.fields([{ name: 'profile_pic'}]), AdminValidators.create(), GlobalMiddleWare.checkError, AdminController.create);
+        this.router.post('/create', new Utils().adminMulter.fields([{ name: 'banner'}]), AdminValidators.create(), GlobalMiddleWare.checkError, AdminController.create);
     }
     patchRoutes(){
-        this.router.patch('/update', GlobalMiddleWare.adminAuthenticate, new Utils().adminMulter.fields([{ name: 'profile_pic'}]), GlobalMiddleWare.checkError, AdminController.update);
+        this.router.patch('/update', GlobalMiddleWare.adminAuthenticate, new Utils().adminMulter.fields([{ name: 'banner'}]), GlobalMiddleWare.checkError, AdminController.update);
     }
     deleteRoutes(){
     }

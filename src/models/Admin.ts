@@ -6,7 +6,7 @@ const adminSchema = new mongoose.Schema({
     name                     : {type: String, required: true},
     email                    : {type: String, required: true},
     password                 : {type: String, required: true},
-    profile_pic              : {type: String, required: false},
+    banner                   : {type: String, required: false},
     status                   : {type: Boolean, required: true, default: true},
     created_at               : {type: Date, required: true, default: Utils.indianTimeZone},
     updated_at               : {type: Date, required: true, default: Utils.indianTimeZone},
