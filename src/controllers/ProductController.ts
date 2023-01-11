@@ -1,5 +1,6 @@
 import Product from "../models/Product";
 import * as fs from 'fs';
+import Admin from "../models/Admin";
 
 export class ProductController {
 
@@ -73,6 +74,20 @@ export class ProductController {
             const data = {
                 message : 'Success',
                 data:product
+            };
+            res.json(data);
+        } catch (e) {
+            next(e)
+        }
+    }
+
+    static async banner(req, res, next){
+
+        try {
+            var banner = await Admin.findOne({}, {__v: 0});
+            const data = {
+                message : 'Success',
+                data:banner['banner']
             };
             res.json(data);
         } catch (e) {

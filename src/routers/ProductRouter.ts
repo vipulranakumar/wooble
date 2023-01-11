@@ -16,12 +16,13 @@ class ProductRouter {
     }
 
     getRoutes(){
-        this.router.get('/title/:slug', ProductValidators.Product(), GlobalMiddleWare.checkError, ProductController.Product);
         this.router.get('/all', ProductController.All);
+        this.router.get('/banner', ProductController.banner);
         this.router.get('/search', ProductController.Search);
         this.router.get('/login', ProductValidators.login(), GlobalMiddleWare.checkError, ProductController.login);
         this.router.get('/admin/all', GlobalMiddleWare.adminAuthenticate, ProductController.adminAll);
         this.router.get('/product_category/:id', ProductValidators.Product_category(), GlobalMiddleWare.checkError, ProductController.ProductCategory);
+        this.router.get('/:slug', ProductValidators.Product(), GlobalMiddleWare.checkError, ProductController.Product);
     }
     postRoutes(){
         this.router.post('/create', GlobalMiddleWare.adminAuthenticate, new Utils().ProductMulter.fields([{ name: 'image'},{ name: 'login_image'},{ name: 'tutorial_video'}]), ProductValidators.create(), GlobalMiddleWare.checkError, ProductController.Create);
